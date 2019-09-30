@@ -2,7 +2,9 @@ package com.example.a20dice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.HashMap;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
 
@@ -59,12 +62,21 @@ public class MainActivity extends AppCompatActivity {
     private void rollDice() {
         int randomNumber = rng.nextInt(20) +1;
 
+        SharedPreferences Preference = getSharedPreferences("SCORE", Context.MODE_PRIVATE);
+        int number_rolled = Preference.getInt(Integer.toString(randomNumber)+"_score",0);
+        number_rolled++;
+
+        SharedPreferences.Editor editor = getSharedPreferences("SCORE",Context.MODE_PRIVATE).edit();
+        editor.putInt(Integer.toString(randomNumber)+"_score",number_rolled);
+        editor.commit();
+
         switch (randomNumber){
             case 1:
                 imageViewDice.setImageResource(R.drawable.dice1);
                 textview.setText(R.string.text_criticalM);
                 textview.setTextColor(textview.getResources().getColorStateList(R.color.Badluck));
                 MySoundPool.play(sound2,1,1,0,0,1);
+
                 break;
             case 2:
                 imageViewDice.setImageResource(R.drawable.dice2);
