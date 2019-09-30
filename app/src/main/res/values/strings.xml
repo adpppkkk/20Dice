@@ -3,4 +3,5 @@
     <string name="text_criticalH">Critical Hit!</string>
     <string name="text_criticalM">Critical Miss!</string>
     <string name="plain"></string>
+    <string name="b_socre">Socre</string>
 </resources>

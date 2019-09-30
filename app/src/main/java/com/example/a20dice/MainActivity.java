@@ -2,9 +2,11 @@ package com.example.a20dice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageViewDice;
     private TextView textview;
     private Random rng = new Random();
+    private Button scorepage;
     int sound1,sound2,sound3;
     private SoundPool MySoundPool = new SoundPool(3,0,5);
     @Override
@@ -35,6 +38,21 @@ public class MainActivity extends AppCompatActivity {
                 rollDice();
             }
         });
+
+        Button scorepage = findViewById(R.id.Score);
+        scorepage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openScorepage();
+            }
+        });
+
+    }
+
+
+    public void openScorepage(){
+        Intent intent = new Intent(this, ScoreActivity.class);
+        startActivity(intent);
     }
 
 
